@@ -1,5 +1,4 @@
 /**
- * Demo for RF remote switch receiver.
  * For details, see NewRemoteReceiver.h!
  *
  * Connect the transmitter to digital pin 11.
@@ -7,10 +6,6 @@
  * This sketch demonstrates the use of the NewRemoteTransmitter class.
  *
  * When run, this sketch switches some pre-defined devices on and off in a loop.
- *
- * NOTE: the actual receivers have the address and group numbers in this example
- * are only for demonstration! If you want to duplicate an existing remote, please
- * try the "retransmitter"-example instead.
  * 
  * To use this actual example, you'd need to "learn" the used code in the receivers
  * This sketch is unsuited for that.
@@ -88,5 +83,5 @@ void loop() {
 //    transmitter.sendUnit(7, statusEight);
 //  }
 
-  delay(20);
+  delay(40);
 }
