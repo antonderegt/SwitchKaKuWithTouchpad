@@ -1,7 +1,7 @@
 /**
  * For details, see NewRemoteReceiver.h!
  *
- * Connect the transmitter to digital pin 11.
+ * Connect the transmitter to digital pin 12.
  *
  * This sketch demonstrates the use of the NewRemoteTransmitter class.
  *
@@ -11,8 +11,10 @@
  * This sketch is unsuited for that.
  * 
  */
-
+ 
+#include <VirtualWire.h>
 #include <NewRemoteTransmitter.h>
+
 const int touchPadOne = 2;
 const int toucPadTwo = 3;
 const int toucPadThree = 4;
@@ -31,11 +33,12 @@ int statusSix = 0;
 int statusSeven = 0;
 int statusEight = 0;
 
+char *msg;
 
-// Create a transmitter on address 123, using digital pin 11 to transmit, 
+// Create a transmitter on address 123, using digital pin 12 to transmit, 
 // with a period duration of 260ms (default), repeating the transmitted
 // code 2^3=8 times.
-NewRemoteTransmitter transmitter(15986790, 11, 260, 3);
+NewRemoteTransmitter transmitter(15986790, 12, 260, 3);
 
 void setup() {
   pinMode(touchPadOne, INPUT);
@@ -47,6 +50,10 @@ void setup() {
   pinMode(toucPadSix, INPUT);
   pinMode(toucPadSeven, INPUT);
   pinMode(toucPadEight, INPUT);
+
+  // Initialise the IO and ISR
+  vw_set_ptt_inverted(true);  // Required for DR3100
+  vw_setup(2000);	      // Bits per sec
 }
 
 void loop() {
@@ -67,21 +74,36 @@ void loop() {
     transmitter.sendUnit(0, statusFour);
   }
   if (digitalRead(touchPadFive) == HIGH){
-    statusFive = !statusFive;
-    transmitter.sendUnit(4, statusFive);
+    msg = "brightnessMin";
+    vw_send((uint8_t *)msg, strlen(msg));
+    vw_wait_tx(); // Wait until the whole message is gone
+    delay(200);
   }
-//  if (digitalRead(toucPadSix) == HIGH){
-//    statusSix = !statusSix;
-//    transmitter.sendUnit(5, statusSix);
-//  }
-//  if (digitalRead(toucPadSeven) == HIGH){
-//    statusSeven = !statusSeven;
-//    transmitter.sendUnit(6, statusSeven);
-//  }
-//  if (digitalRead(toucPadEight) == HIGH){
-//    statusEight = !statusEight;
-//    transmitter.sendUnit(7, statusEight);
-//  }
+  if (digitalRead(toucPadSix) == HIGH){
+    msg = "brightnessPlus";
+    vw_send((uint8_t *)msg, strlen(msg));
+    vw_wait_tx(); // Wait until the whole message is gone
+    delay(200);
+  }
+  if (digitalRead(toucPadSeven) == HIGH){
+    // Implement color switcher
+  }
+  
+  // LED on/off
+  if (digitalRead(toucPadEight) == HIGH){
+    statusEight = !statusEight;
+    
+    if (statusEight){
+      msg = "on";
+    }
+    else {
+      msg = "off";
+    }
+    
+    vw_send((uint8_t *)msg, strlen(msg));
+    vw_wait_tx(); // Wait until the whole message is gone
+    delay(200);
+  }
 
-  delay(40);
+  delay(20);
 }
