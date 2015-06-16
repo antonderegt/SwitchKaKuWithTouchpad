@@ -1,7 +1,7 @@
 /**
  * For details, see NewRemoteReceiver.h!
  *
- * Connect the transmitter to digital pin 12.
+ * Connect the transmitter to digital pin 9.
  *
  * This sketch demonstrates the use of the NewRemoteTransmitter class.
  *
@@ -15,14 +15,14 @@
 #include <VirtualWire.h>
 #include <NewRemoteTransmitter.h>
 
-const int touchPadOne = 2;
-const int toucPadTwo = 3;
-const int toucPadThree = 4;
-const int toucPadFour = 5;
-const int touchPadFive = 6;
-const int toucPadSix = 7;
-const int toucPadSeven = 8;
-const int toucPadEight = 9;
+const int touchPadOne = 17;
+const int toucPadTwo = 16;
+const int toucPadThree = 15;
+const int toucPadFour = 14;
+const int touchPadFive = 13;
+const int toucPadSix = 12;
+const int toucPadSeven = 11;
+const int toucPadEight = 10;
 
 int statusOne = 0;
 int statusTwo = 0;
@@ -35,10 +35,10 @@ int statusEight = 0;
 
 char *msg;
 
-// Create a transmitter on address 123, using digital pin 12 to transmit, 
+// Create a transmitter on address 123, using digital pin 9 to transmit, 
 // with a period duration of 260ms (default), repeating the transmitted
 // code 2^3=8 times.
-NewRemoteTransmitter transmitter(15986790, 12, 260, 3);
+NewRemoteTransmitter transmitter(15986790, 9, 260, 3);
 
 void setup() {
   pinMode(touchPadOne, INPUT);
