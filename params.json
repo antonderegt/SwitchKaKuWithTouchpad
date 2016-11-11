@@ -1,0 +1,6 @@
+{
+  "name": "Switchkakuwithtouchpad",
+  "tagline": "This is how I programmed my touchpad to switch my KaKu switches (real ones and self-made ones)",
+  "body": "# SwitchKaKuWithTouchpad\r\nThis is how I programmed my touchpad to switch my KaKu switches (real ones and faked ones, see https://github.com/antonderegt/BedLightSensor for the code to fake a KaKu switch)\r\n\r\nI used two libraries\r\n* VirtualWire (https://www.pjrc.com/teensy/td_libs_VirtualWire.html)\r\n* NewRemoteTransmitter (https://bitbucket.org/fuzzillogic/433mhzforarduino/wiki/Home)\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
